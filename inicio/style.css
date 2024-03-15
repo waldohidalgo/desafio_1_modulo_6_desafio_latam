@@ -1,0 +1,31 @@
+body {
+  background-color: azure;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+header {
+  text-align: center;
+}
+
+main {
+  text-align: center;
+  @media screen and (min-width: 480px) {
+    max-width: 80%;
+    margin: auto;
+  }
+}
+.descripcion_desafio {
+  margin-top: 3rem;
+}
+
+ol {
+  text-align: left;
+}
+
+ol li {
+  padding-bottom: 1rem;
+}
+.puntaje,
+.destacado {
+  font-weight: 700;
+}
