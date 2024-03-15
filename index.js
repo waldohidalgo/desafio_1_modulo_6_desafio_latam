@@ -41,9 +41,8 @@ app.use("/abracadabra/juego/:usuario", (req, res, next) => {
 app.get("/abracadabra/juego/:usuario", (req, res) => {
   res.sendFile("index.html", { root: "assets" });
 });
-
+const numeroAleatorio = Math.floor(Math.random() * 4) + 1;
 app.get("/abracadabra/conejo/:n", (req, res) => {
-  const numeroAleatorio = Math.floor(Math.random() * 4) + 1;
   const numeroParametro = +req.params.n;
   //console.log(typeof numeroParametro);
   if (numeroAleatorio == numeroParametro) {
