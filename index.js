@@ -8,15 +8,16 @@ app.listen(port, () => {
   console.log(`Servidor escuchando en el puerto: ${port}`);
 });
 
-app.use(express.static("inicio"));
+app.use("/inicio", express.static("inicio"));
+app.use("/assets", express.static("assets"));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "inicio", "index.html"));
+  res.sendFile("index.html", {
+    root: "inicio",
+  });
 });
 
 const usuarios = ["usuario1", "usuario2", "usuario3", "usuario4", "usuario5"];
-
-app.use(express.static("assets"));
 
 app.get("/abracadabra/usuarios", (req, res) => {
   res.json(usuarios);
@@ -36,9 +37,9 @@ app.use("/abracadabra/juego/:usuario", (req, res, next) => {
     });
   }
 });
-app.use(express.static("src"));
+
 app.get("/abracadabra/juego/:usuario", (req, res) => {
-  res.sendFile(path.join(__dirname, "src", "index.html"));
+  res.sendFile("index.html", { root: "assets" });
 });
 
 app.get("/abracadabra/conejo/:n", (req, res) => {
