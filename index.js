@@ -10,6 +10,7 @@ app.listen(port, () => {
 
 app.use("/inicio", express.static("inicio"));
 app.use("/assets", express.static("assets"));
+app.use("/error404", express.static("error404"));
 
 app.get("/", (req, res) => {
   res.sendFile("index.html", {
@@ -42,9 +43,10 @@ app.get("/abracadabra/juego/:usuario", (req, res) => {
   res.sendFile("index.html", { root: "assets" });
 });
 const numeroAleatorio = Math.floor(Math.random() * 4) + 1;
+
 app.get("/abracadabra/conejo/:n", (req, res) => {
   const numeroParametro = +req.params.n;
-  //console.log(typeof numeroParametro);
+
   if (numeroAleatorio == numeroParametro) {
     res.sendFile("conejito.jpg", {
       root: path.join(__dirname, "assets"),
@@ -65,8 +67,6 @@ app.get("/abracadabra/conejo/:n", (req, res) => {
     });
   }
 });
-
-app.use(express.static("error404"));
 
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "error404", "index.html"));

@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/xt256.min.css"
+    />
+
     <link rel="stylesheet" href="/inicio/style.css" />
     <title>Desafío Abracadabra</title>
   </head>
@@ -22,12 +27,68 @@
           <li>
             Crear un servidor con Express en el puerto 3000.
             <span class="puntaje">(2 Puntos)</span>
+
+            <pre><code class="language-javascript">
+const app = express();
+const port = process.env.PORT || 4000;
+
+app.listen(port, () =&gt; {
+  console.log(`Servidor escuchando en el puerto: ${port}`);
+});
+            </code></pre>
           </li>
+
           <li>
             Definir la carpeta “assets” como carpeta pública del servidor.<span
               class="puntaje"
               >(1 Punto)</span
             >
+            <pre><code class="language-javascript">
+/*
+Utilizaré varias carpetas como publicas no solo la carpeta assets
+*/
+app.use("/inicio", express.static("inicio"));
+app.use("/assets", express.static("assets"));
+app.use("/error404", express.static("error404"));
+</code></pre>
+            <ul>
+              <li>
+                El link del acceso a la carpeta pública
+                <strong
+                  ><a
+                    id="ruta_carpeta_inicio"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >inicio</a
+                  ></strong
+                >
+              </li>
+              <li>
+                El link del acceso a la carpeta pública
+                <strong
+                  ><a
+                    id="ruta_carpeta_assets"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >assets</a
+                  ></strong
+                >
+              </li>
+              <li>
+                El link del acceso a la carpeta pública
+                <strong
+                  ><a
+                    id="ruta_carpeta_error404"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >error404</a
+                  ></strong
+                >
+              </li>
+            </ul>
           </li>
           <li>
             Crear en el servidor un arreglo de nombres y devolverlo en formato
@@ -42,6 +103,20 @@
               ></span
             >.
             <span class="puntaje">(2 Puntos)</span>
+            <pre><code class="language-javascript">
+const usuarios = 
+    [
+      "usuario1",
+      "usuario2",
+      "usuario3",
+      "usuario4",
+      "usuario5"
+    ];
+
+app.get("/abracadabra/usuarios", (req, res) =&gt; {
+    res.json(usuarios);
+});
+              </code></pre>
           </li>
           <li>
             Crear un middleware con la ruta
@@ -51,6 +126,82 @@
             permitir el paso a la ruta GET correspondiente, de lo contrario
             devolver la imagen “who.jpeg”.
             <span class="puntaje">(2 Puntos)</span>
+            <pre><code class="language-javascript">
+app.use("/abracadabra/juego/:usuario", (req, res, next) ==&gt; {
+  if (usuarios.includes(req.params.usuario)) {
+    next();
+  } else {
+    res.sendFile("who.jpeg", {
+      root: path.join(__dirname, "assets"),
+      dotfiles: "deny",
+      headers: {
+        "x-timestamp": Date.now(),
+        "x-sent": true,
+      },
+    });
+  }
+});
+</code></pre>
+            A continuación muestro rutas para jugar para cada uno de los 5
+            usuarios que estan en el arreglo:
+
+            <ul>
+              <li>
+                <strong
+                  ><a
+                    id="ruta_juego_usuario1"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >ruta juego usuario1</a
+                  ></strong
+                >
+              </li>
+              <li>
+                <strong
+                  ><a
+                    id="ruta_juego_usuario2"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >ruta juego usuario2</a
+                  ></strong
+                >
+              </li>
+              <li>
+                <strong
+                  ><a
+                    id="ruta_juego_usuario3"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >ruta juego usuario3</a
+                  ></strong
+                >
+              </li>
+              <li>
+                <strong
+                  ><a
+                    id="ruta_juego_usuario4"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >ruta juego usuario4</a
+                  ></strong
+                >
+              </li>
+              <li>
+                <strong
+                  ><a
+                    id="ruta_juego_usuario5"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >ruta juego usuario5</a
+                  ></strong
+                >
+              </li>
+            </ul>
           </li>
           <li>
             Crear una ruta
@@ -60,15 +211,107 @@
             En caso de ser exitoso, devolver la imagen del conejo, de lo
             contrario devolver la imagen de Voldemort.
             <span class="puntaje">(2 Puntos)</span>
+            <pre><code class="language-javascript">
+const numeroAleatorio = Math.floor(Math.random() * 4) + 1;
+
+app.get("/abracadabra/conejo/:n", (req, res) ==&gt; {
+  const numeroParametro = +req.params.n;
+
+  if (numeroAleatorio == numeroParametro) {
+    res.sendFile("conejito.jpg", {
+      root: path.join(__dirname, "assets"),
+      dotfiles: "deny",
+      headers: {
+        "x-timestamp": Date.now(),
+        "x-sent": true,
+      },
+    });
+  } else {
+    res.sendFile("voldemort.jpg", {
+      root: path.join(__dirname, "assets"),
+      dotfiles: "deny",
+      headers: {
+        "x-timestamp": Date.now(),
+        "x-sent": true,
+      },
+    });
+  }
+});</code></pre>
+            <p>Las rutas que cumplen lo anterior son las siguientes:</p>
+            <ul>
+              <li>
+                <strong
+                  ><a
+                    id="ruta_conejo_1"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >ruta conejo 1</a
+                  ></strong
+                >
+              </li>
+              <li>
+                <strong
+                  ><a
+                    id="ruta_conejo_2"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >ruta conejo 2</a
+                  ></strong
+                >
+              </li>
+              <li>
+                <strong
+                  ><a
+                    id="ruta_conejo_3"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >ruta conejo 3</a
+                  ></strong
+                >
+              </li>
+              <li>
+                <strong
+                  ><a
+                    id="ruta_conejo_4"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >ruta conejo 4</a
+                  ></strong
+                >
+              </li>
+            </ul>
+            <p>En alguna de estas 4 rutas se encuentra el conejo.</p>
           </li>
           <li>
             Crear una ruta genérica que devuelva un mensaje diciendo “Esta
             página no existe...” al consultar una ruta que no esté definida en
             el servidor. <span class="puntaje">(1 Punto)</span>
+            <pre><code class="language-javascript">
+app.get("/*", (req, res) =&gt; {
+  res.sendFile(path.join(__dirname, "error404", "index.html"));
+});
+              </code></pre>
+            Una ruta que no existe esta disponible en el siguiente
+            <strong
+              ><a
+                id="ruta_error"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                >link</a
+              ></strong
+            >
           </li>
         </ol>
       </section>
     </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
     <script src="/inicio/script.js"></script>
   </body>
 </html>

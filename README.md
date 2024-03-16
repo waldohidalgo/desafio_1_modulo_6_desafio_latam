@@ -6,6 +6,12 @@ EL presente repositorio contiene el código del desafío número 6 **Desarrollo 
 ![Requisitos Hoja 3 y 4](/screenshots/requisitos_3_4.webp)
 ![Requisitos Hoja 5](/screenshots/requisitos_5.webp)
 
+Las tecnologías utilizadas en este desafío fueron las siguientes:
+
+![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+
+Junto con la librería HighLightjs
+
 El desafío lo he completado en un **100%** realizando todo lo solicitado e incluso más allá ya sea creando archivos html que se muestran en cada ruta los cuales son responsivos.
 Un screenshot de cada html mostrado en cada ruta los muestro a continuación:
 

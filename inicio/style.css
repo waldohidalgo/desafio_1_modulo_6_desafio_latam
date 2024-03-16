@@ -20,6 +20,7 @@ main {
 
 ol {
   text-align: left;
+  padding-inline-start: 1rem;
 }
 
 ol li {
@@ -28,4 +29,7 @@ ol li {
 .puntaje,
 .destacado {
   font-weight: 700;
+}
+a {
+  color: blue;
 }
